@@ -7,11 +7,39 @@ export class AppProvider extends React.Component {
         super(props);
         this.state = {
             page: 'dashboard',
-            setPage: this.setPage
+            setPage: this.setPage,
+            ...this.savedSettings(),
+            confirmFavorites: this.confirmFavorites
         }
     }
     setPage = page => this.setState({page})
     
+    confirmFavorites = ()=> {
+        console.log('confirm fav');
+        this.setState({
+            firstVisit: false,
+            page: 'dashboard'
+        });
+
+        localStorage.setItem(
+            'cryptoData',
+            JSON.stringify({
+                test: '<-- button works -->'
+            })
+        )
+    }
+
+    //save settings to local storage for repeat visitors
+    savedSettings(){
+        let cryptoCompareData = JSON.parse(localStorage.getItem('cryptoData'));
+        //if we don't have data, return first visit default data
+        if(!cryptoCompareData){
+            return {page: 'settings', firstVisit: true}
+            //firstVisit: boolean to keep track if user has been here before
+        }
+        //if we do have data:
+        return {};
+    }
     
     //give the children access to provider
     render() {
