@@ -1,15 +1,17 @@
 import React from 'react';
 import './App.css';
-import styled, {css} from 'styled-components';
 
 import AppLayout from './AppLayout';
 import NavBar from './NavBar';
+import {AppProvider} from './AppProvider'
 
 function App() {
   return (
   <AppLayout>
-    <NavBar/>
-      hello world.
+    <AppProvider>
+      <NavBar/>
+        hello world.
+    </AppProvider>
   </AppLayout>
   );
 }

@@ -1,6 +1,8 @@
 import React from 'react';
 import styled, {css} from 'styled-components';
 
+import {AppContext} from "./AppProvider";
+
 const NavBar = styled.div`
     display:grid;
     grid-template-columns: 100px auto 100px 100px;
@@ -18,15 +20,29 @@ const Logo = styled.div`
 const ControlButtonElement = styled.div`
     cursor: pointer;
     ${props => props.active && css`
-        text-shadow: 0px 0px 100px #55ffbb; 
+    text-shadow: 0px 0px 60px red;
     `}
 `;
 // a functional component that's a wrapper for the buttons
 function ControlButton({name, active}) {
     return(
-        <ControlButtonElement active={active}>
+        // <AppContext.Consumer>
+        //     <ControlButtonElement active={active}>
+        //         {toProperCase(name)}
+        //     </ControlButtonElement>
+        // </AppContext.Consumer>
+
+        <AppContext.Consumer>
+        {({page, setPage}) =>(
+        <ControlButtonElement 
+            active = {page === name}
+            onClick = {() => setPage(name)}
+        >
             {toProperCase(name)}
         </ControlButtonElement>
+        )}
+    </AppContext.Consumer>
+      
     )
 };
 
@@ -36,7 +52,7 @@ export default function () {
             <Logo>Logo_here</Logo>
             <div/>
             <ControlButton active name="dashboard"/>
-            <ControlButton active name="Settings"/>
+            <ControlButton name="settings"/>
         
         </NavBar>
     )
