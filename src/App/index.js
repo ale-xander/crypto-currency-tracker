@@ -4,14 +4,17 @@ import './App.css';
 import AppLayout from './AppLayout';
 import NavBar from './NavBar';
 import {AppProvider} from './AppProvider';
-import Settings from '../Settings'
+import Settings from '../Settings';
+import Content from '../Shared/Content';
 
 function App() {
   return (
   <AppLayout>
     <AppProvider>
       <NavBar/>
-        <Settings />
+        <Content>
+          <Settings />
+        </Content>
     </AppProvider>
   </AppLayout>
   );
