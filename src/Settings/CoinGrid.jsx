@@ -8,7 +8,7 @@ export const CoinGridStyled = styled.div`
   
 `
 
-export default function ({}){
+export default function (){
   return (
     <AppContext.Consumer>
     {({coinList}) => (
