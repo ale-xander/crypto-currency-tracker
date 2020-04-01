@@ -1,6 +1,10 @@
 // state manager for the app
 import React from 'react';
+
 export const AppContext = React.createContext();
+
+const cc = require('cryptocompare')
+cc.setApiKey('d455128ae090441e96c16dbd4db1660d3fd94ce1c5f47557d4f5b288e9b97b72')
 
 export class AppProvider extends React.Component {
     constructor(props){
