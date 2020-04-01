@@ -3,8 +3,10 @@ import React from 'react';
 
 export const AppContext = React.createContext();
 
+global.fetch = require('node-fetch')
 const cc = require('cryptocompare')
 cc.setApiKey('d455128ae090441e96c16dbd4db1660d3fd94ce1c5f47557d4f5b288e9b97b72')
+
 
 export class AppProvider extends React.Component {
     constructor(props){
@@ -16,6 +18,21 @@ export class AppProvider extends React.Component {
             confirmFavorites: this.confirmFavorites
         }
     }
+    // ------------------ Fetch the coins, prices and historical ------------------
+    componentDidMount = () => {
+        console.log('component did mount')
+        this.fetchCoins();
+        // this.fetchPrices();
+        // this.fetchHistorical();
+    }
+    
+    fetchCoins = async () => {
+        console.log('fetching coins')
+        let coinList = (await cc.coinList()).Data;
+        console.log(coinList)
+        this.setState({coinList});
+    }
+
     setPage = page => this.setState({page})
     
     confirmFavorites = ()=> {
