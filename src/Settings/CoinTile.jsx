@@ -1,7 +1,7 @@
 import React from 'react';
 import {AppContext} from "../App/AppProvider";
 import {SelectableTile} from "../Shared/Tile";
-
+import CoinHeaderGrid from './CoinHeaderGrid'
 
 export default function({coinKey}){
     return <AppContext.Consumer>
@@ -10,7 +10,12 @@ export default function({coinKey}){
         let coin = coinList[coinKey];
   
         let TileClass = SelectableTile;
-        return <TileClass> {coinKey} </TileClass>
+        return (
+            <TileClass> 
+                <CoinHeaderGrid name={coin.CoinName} symbol={coin.Symbol} />
+              
+            </TileClass>
+        )
       }}
     </AppContext.Consumer>
   }
