@@ -10,16 +10,19 @@ export const CoinGridStyled = styled.div`
   grid-gap: 15px; 
   margin-top: 40px; 
 `
-function getCoinsToDisplay(coinList, topSection){
+function getCoinsToDisplay(coinList, topSection, favorites){
   //return topSection ? favorites : getLowerSectionCoins(coinList, filterCoins);
-  return Object.keys(coinList).slice(0, topSection ? 10 : 100) //list only the first 100
+  // return Object.keys(coinList).slice(0, topSection ? 10 : 100) //list only the first 100
+  return topSection
+  ? favorites
+  : Object.keys(coinList).slice(0, 5)
 }
 export default function ({topSection}){
   return (
     <AppContext.Consumer>
-    {({coinList}) => (
+    {({coinList, favorites}) => (
       <CoinGridStyled>
-            {getCoinsToDisplay(coinList, topSection).map(coinKey => 
+            {getCoinsToDisplay(coinList, topSection, favorites).map(coinKey => 
             <CoinTile topSection={topSection} coinKey={coinKey} />
             )}
         

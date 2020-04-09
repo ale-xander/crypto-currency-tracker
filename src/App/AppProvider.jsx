@@ -15,7 +15,8 @@ export class AppProvider extends React.Component {
             page: 'dashboard',
             setPage: this.setPage,
             ...this.savedSettings(),
-            confirmFavorites: this.confirmFavorites
+            confirmFavorites: this.confirmFavorites,
+            favorites: ['BTC', 'DGC']
         }
     }
     // ------------------ Fetch the coins, prices and historical ------------------
