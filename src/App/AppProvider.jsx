@@ -1,12 +1,12 @@
 // state manager for the app
 import React from 'react';
-
+import _ from 'lodash';
 export const AppContext = React.createContext();
 
 global.fetch = require('node-fetch')
 const cc = require('cryptocompare')
 cc.setApiKey('d455128ae090441e96c16dbd4db1660d3fd94ce1c5f47557d4f5b288e9b97b72')
-
+const MAX_FAVORITES = 10;
 
 export class AppProvider extends React.Component {
     constructor(props){
@@ -16,7 +16,9 @@ export class AppProvider extends React.Component {
             setPage: this.setPage,
             ...this.savedSettings(),
             confirmFavorites: this.confirmFavorites,
-            favorites: ['BTC', 'DGC']
+            favorites: ['BTC', 'DGC'],
+            addCoin: this.addCoin,
+            removeCoin: this.removeCoin,
         }
     }
     // ------------------ Fetch the coins, prices and historical ------------------
@@ -32,6 +34,22 @@ export class AppProvider extends React.Component {
         let coinList = (await cc.coinList()).Data;
             // console.log(coinList)
         this.setState({coinList});
+    }
+    
+    //key = the coin we're adding
+    addCoin = key => {
+        //make a copy of the favorites array
+        let favorites = [...this.state.favorites];
+        if(favorites.length < MAX_FAVORITES){
+            favorites.push(key);
+            this.setState({favorites});
+        }
+    }
+
+    removeCoin = key => {
+        let favorites = [...this.state.favorites];
+        //pull value from array, return new array. new array of this value removed
+        this.setState({favorites: _.pull(favorites, key)})
     }
 
     setPage = page => this.setState({page})
