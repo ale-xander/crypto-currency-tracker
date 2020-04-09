@@ -19,6 +19,7 @@ export class AppProvider extends React.Component {
             favorites: ['BTC', 'DGC'],
             addCoin: this.addCoin,
             removeCoin: this.removeCoin,
+            isInFavorites: this.isInFavorites,
         }
     }
     // ------------------ Fetch the coins, prices and historical ------------------
@@ -51,6 +52,9 @@ export class AppProvider extends React.Component {
         //pull value from array, return new array. new array of this value removed
         this.setState({favorites: _.pull(favorites, key)})
     }
+    
+    //check if coin is already in favorites. takes an array and and checks if key is in array
+    isInFavorites = key => _.includes(this.state.favorites, key)
 
     setPage = page => this.setState({page})
     
