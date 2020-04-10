@@ -20,6 +20,7 @@ export class AppProvider extends React.Component {
             addCoin: this.addCoin,
             removeCoin: this.removeCoin,
             isInFavorites: this.isInFavorites,
+            setFilteredCoins: this.setFilteredCoins,
         }
     }
     // ------------------ Fetch the coins, prices and historical ------------------
@@ -94,6 +95,10 @@ export class AppProvider extends React.Component {
         return {favorites};
     }
     
+    //set the coins that match the search criteria to state
+    setFilteredCoins = (filteredCoins) => this.setState({filteredCoins})
+
+
     //give the children access to provider
     render() {
         return (
