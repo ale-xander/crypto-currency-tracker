@@ -7,6 +7,7 @@ import {AppProvider} from './AppProvider';
 import Settings from '../Settings';
 import Content from '../Shared/Content';
 
+
 function App() {
   return (
   <AppLayout>

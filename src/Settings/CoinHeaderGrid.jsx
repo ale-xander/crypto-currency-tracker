@@ -26,9 +26,9 @@ export default function ({name, symbol, topSection}) {
     <CoinHeaderGridStyled>
         <div> {name} </div>
         {topSection 
-        ? (<DeleteIcon>X</DeleteIcon>)
-        : (<CoinSymbol> {symbol} </CoinSymbol>)
-    }
+            ? (<DeleteIcon> X </DeleteIcon>)
+            : (<CoinSymbol> {symbol} </CoinSymbol>)
+        }
         
     </CoinHeaderGridStyled>
     )

@@ -45,16 +45,20 @@ export class AppProvider extends React.Component {
             favorites.push(key);
             this.setState({favorites});
         }
+        console.log(`adding ${key} coin`)
     }
 
     removeCoin = key => {
         let favorites = [...this.state.favorites];
+        console.log(`removing ${key} coin`)
         //pull value from array, return new array. new array of this value removed
         this.setState({favorites: _.pull(favorites, key)})
     }
     
     //check if coin is already in favorites. takes an array and and checks if key is in array
-    isInFavorites = key => _.includes(this.state.favorites, key)
+    isInFavorites = key => {
+        _.includes(this.state.favorites, key)
+    }
 
     setPage = page => this.setState({page})
     
@@ -68,9 +72,12 @@ export class AppProvider extends React.Component {
         localStorage.setItem(
             'cryptoData',
             JSON.stringify({
-                test: '<-- button works -->'
-            })
+                // test: '<-- button works -->',
+                favorites: this.state.favorites
+                //favorites: ['BTC']
+            }),
         )
+        
     }
 
     //save settings to local storage for repeat visitors
@@ -81,8 +88,10 @@ export class AppProvider extends React.Component {
             return {page: 'settings', firstVisit: true}
             //firstVisit: boolean to keep track if user has been here before
         }
+        //let favorites = ['BTC']
+        let {favorites} = cryptoCompareData;
         //if we do have data:
-        return {};
+        return {favorites};
     }
     
     //give the children access to provider
