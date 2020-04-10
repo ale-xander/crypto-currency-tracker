@@ -20,7 +20,9 @@ const SearchInput = styled.input`
 function filterCoins(e, setFilteredCoins, coinList){
     //get value of event
     let inputValue = e.target.value;
-        console.log(`input from search ${inputValue}`)
+        //console.log(`input from search ${inputValue}`)
+    
+        //if you clear the search it should go back to all the results
     if(!inputValue){
         setFilteredCoins(null);
         return;
@@ -41,8 +43,16 @@ const handleFilter = _.debounce((inputValue, coinList, setFilterCoins) => {
     let fuzzyResults = fuzzy
         .filter(inputValue, allStringsToSearch, {})
         .map(result => result.string);
-    console.log(fuzzyResults)
+    //console.log(fuzzyResults)
 
+    //separate coin names from coin symbols. pick names of coins from coinlist and set back to app as filtered coins
+    let filteredCoins = _.pickBy(coinList, (result, symKey) => {
+        let coinName = result.CoinName;
+        return (_.includes(fuzzyResults, symKey) || _.includes(fuzzyResults, coinName));
+    });
+    // console.log(`filtered coins`)
+    // console.log(filteredCoins)
+    setFilterCoins(filteredCoins)
 
 }, 500);
 
