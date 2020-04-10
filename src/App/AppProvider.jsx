@@ -27,7 +27,7 @@ export class AppProvider extends React.Component {
     componentDidMount = () => {
         console.log('component did mount')
         this.fetchCoins();
-        // this.fetchPrices();
+        this.fetchPrices();
         // this.fetchHistorical();
     }
     
@@ -68,7 +68,11 @@ export class AppProvider extends React.Component {
         this.setState({
             firstVisit: false,
             page: 'dashboard'
-        });
+        },
+        () => {
+            this.fetchPrices()
+        }
+        );
 
         localStorage.setItem(
             'cryptoData',
@@ -78,7 +82,6 @@ export class AppProvider extends React.Component {
                 //favorites: ['BTC']
             }),
         )
-        
     }
 
     //save settings to local storage for repeat visitors
@@ -98,6 +101,33 @@ export class AppProvider extends React.Component {
     //set the coins that match the search criteria to state
     setFilteredCoins = (filteredCoins) => this.setState({filteredCoins})
 
+    //get coin prices
+    fetchPrices = async () => {
+        //don't fetch prices before you have favorites
+        if(this.state.firstVisit) return;
+        
+        //return a promise array; wait for prices() to resolve
+        let prices = await this.prices();
+        console.log('prices')
+        console.log(prices)
+        prices = prices.filter(price => Object.keys(price).length);
+        this.setState({prices});
+    }
+    
+    //get price from CryptoCompare
+    prices = async () => {
+        let returnData = [];
+        for(let i = 0; i < this.state.favorites.length; i++){
+            try {
+                let priceData = await cc.priceFull(this.state.favorites[i], 'USD');
+                returnData.push(priceData);
+            } 
+            catch (e){
+                console.warn('Fetch price error: ', e);
+            }
+        }
+        return returnData;
+    }
 
     //give the children access to provider
     render() {
