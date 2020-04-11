@@ -42,16 +42,22 @@ function PriceTile({sym, data}){
         <PriceTileStyled>
             <CoinHeaderGridStyled>
                 <div> {sym} </div>
-                <JustifyRight>
-                    <ChangePct red={data.CHANGEPCT24HOUR < 0}>
-                        {numberFormat(data.CHANGEPCT24HOUR)}
-                    </ChangePct>
-                </JustifyRight>
+                <ChangePercent data={data} />
             </CoinHeaderGridStyled>
             <TickerPrice>
                 ${numberFormat(data.PRICE)}
             </TickerPrice>
         </PriceTileStyled>
+    );
+}
+
+function ChangePercent({data}){
+    return (
+        <JustifyRight>
+            <ChangePct red={data.CHANGEPCT24HOUR < 0}>
+            {numberFormat(data.CHANGEPCT24HOUR)}%
+            </ChangePct>
+        </JustifyRight>
     );
 }
 
