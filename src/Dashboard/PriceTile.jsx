@@ -7,6 +7,21 @@ import {CoinHeaderGridStyled} from '../Settings/CoinHeaderGrid'
 const numberFormat = number => {
     return +(number + '').slice(0, 6);
 }
+const JustifyRight = styled.div`
+    justify-self: right; 
+`
+const JustifyLeft = styled.div`
+    justify-self: left; 
+`
+const TickerPrice = styled.div`
+    ${fontSizeBig};
+`
+const ChangePct = styled.div`
+    color: green; 
+    ${props => props.red && css`
+        color: red; 
+    `}
+`
 
 const PriceTileStyled = styled(SelectableTile)`
     ${props => props.compact && css`
@@ -27,8 +42,15 @@ function PriceTile({sym, data}){
         <PriceTileStyled>
             <CoinHeaderGridStyled>
                 <div> {sym} </div>
-                <div>{numberFormat(data.CHANGEPCT24HOUR)}</div>
+                <JustifyRight>
+                    <ChangePct red={data.CHANGEPCT24HOUR < 0}>
+                        {numberFormat(data.CHANGEPCT24HOUR)}
+                    </ChangePct>
+                </JustifyRight>
             </CoinHeaderGridStyled>
+            <TickerPrice>
+                ${numberFormat(data.PRICE)}
+            </TickerPrice>
         </PriceTileStyled>
     );
 }
@@ -40,8 +62,7 @@ export default function ({price, index}) {
 
     return(
         <PriceTile sym={sym} data={data} >
-            {sym}
-            {data.PRICE}
+        
         </PriceTile>
     )
 }
