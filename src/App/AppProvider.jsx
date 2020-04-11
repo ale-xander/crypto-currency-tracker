@@ -65,9 +65,13 @@ export class AppProvider extends React.Component {
     
     confirmFavorites = ()=> {
         console.log('confirm fav');
+        
+        let currentFavorite = this.state.favorites[0];
+
         this.setState({
             firstVisit: false,
-            page: 'dashboard'
+            page: 'dashboard',
+            currentFavorite,
         },
         () => {
             this.fetchPrices()
@@ -78,8 +82,9 @@ export class AppProvider extends React.Component {
             'cryptoData',
             JSON.stringify({
                 // test: '<-- button works -->',
-                favorites: this.state.favorites
+                favorites: this.state.favorites,
                 //favorites: ['BTC']
+                currentFavorite
             }),
         )
     }
@@ -93,9 +98,9 @@ export class AppProvider extends React.Component {
             //firstVisit: boolean to keep track if user has been here before
         }
         //let favorites = ['BTC']
-        let {favorites} = cryptoCompareData;
+        let {favorites, currentFavorite} = cryptoCompareData;
         //if we do have data:
-        return {favorites};
+        return {favorites, currentFavorite};
     }
     
     //set the coins that match the search criteria to state
