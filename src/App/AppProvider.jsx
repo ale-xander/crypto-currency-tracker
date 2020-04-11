@@ -21,6 +21,7 @@ export class AppProvider extends React.Component {
             removeCoin: this.removeCoin,
             isInFavorites: this.isInFavorites,
             setFilteredCoins: this.setFilteredCoins,
+            setCurrentFavorite: this.setCurrentFavorite,
         }
     }
     // ------------------ Fetch the coins, prices and historical ------------------
@@ -132,6 +133,17 @@ export class AppProvider extends React.Component {
             }
         }
         return returnData;
+    }
+
+    setCurrentFavorite = (sym) => {
+        this.setState({
+            currentFavorite: sym,
+        });
+    
+        localStorage.setItem('cryptoData', JSON.stringify({
+            ...JSON.parse(localStorage.getItem('cryptoData')),
+            currentFavorite: sym
+        }))
     }
 
     //give the children access to provider

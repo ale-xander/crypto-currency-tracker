@@ -3,6 +3,7 @@ import styled, {css} from 'styled-components';
 import {SelectableTile} from "../Shared/Tile";
 import {fontSize3, fontSizeBig, greenBoxShadow} from "../Shared/Styles";
 import {CoinHeaderGridStyled} from "../Settings/CoinHeaderGrid";
+import { AppContext } from "../App/AppProvider";
 
 const JustifyRight = styled.div`
     justify-self: right; 
@@ -52,9 +53,11 @@ function ChangePercent({data}){
     );
 }
 
-function PriceTile({sym, data}){
+function PriceTile({sym, data, currentFavorite, setCurrentFavorite}){
     return (
-        <PriceTileStyled >
+        <PriceTileStyled 
+            currentFavorite={currentFavorite}
+            onClick={setCurrentFavorite}>
         <CoinHeaderGridStyled>
             <> {sym} </>
             <ChangePercent data={data}/>
@@ -66,17 +69,19 @@ function PriceTile({sym, data}){
     );
 }
 
-function PriceTileCompact({sym, data}){
-  return (
-    <PriceTileStyled >
-      <JustifyLeft> {sym} </JustifyLeft>
-      <ChangePercent data={data}/>
-      <>
-        ${numberFormat(data.PRICE)}
-      </>
+function PriceTileCompact({sym, data, currentFavorite, setCurrentFavorite}){
+    return (
+    <PriceTileStyled 
+        onClick={setCurrentFavorite}
+        compact 
+        currentFavorite={currentFavorite}>
+        <JustifyLeft> {sym} </JustifyLeft>
+        <ChangePercent data={data}/>
+        <>
+            ${numberFormat(data.PRICE)}
+        </>
     </PriceTileStyled>
-  );
-}
+)}
 
 export default function({price, index}){
     let sym = Object.keys(price)[0];
@@ -84,8 +89,21 @@ export default function({price, index}){
     let TileClass = index < 5 
         ? PriceTile 
         : PriceTileCompact;
+    
     return (
-            <TileClass sym={sym} data={data}>
-            </TileClass>
+        <AppContext.Consumer>
+            {
+                ({currentFavorite, setCurrentFavorite}) => 
+                    <TileClass 
+                        sym={sym} 
+                        data={data}
+                        currentFavorite={currentFavorite === sym}
+                        //must be an arrow func b/c othwerwise it won't pass the symbol
+                        //set the current favorite to be the symbol
+                        setCurrentFavorite={() => setCurrentFavorite(sym)}>
+                    </TileClass>
+                
+            }
+        </AppContext.Consumer>
     )
 }
