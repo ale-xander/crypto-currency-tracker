@@ -7,9 +7,16 @@ import CoinImage from '../Shared/CoinImage';
 const SpotlightName = styled.h2`
     text-align: center; 
 `
-
+//pull off the curr fav and image 
 export default function (){
     return (
-        <Tile> some text for the spotlight </Tile>
+        <AppContext.Consumer>
+        {({currentFavorite, coinList}) =>
+            <Tile>
+                <SpotlightName> {coinList[currentFavorite].CoinName} </SpotlightName>
+                <CoinImage spotlight coin={coinList[currentFavorite]}/>
+            </Tile>
+        }
+      </AppContext.Consumer>
     )
 }

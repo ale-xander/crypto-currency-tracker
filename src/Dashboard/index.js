@@ -17,6 +17,7 @@ export default function(){
             <PriceGrid />
             <ChartGrid>
                 <CoinSpotlight />
+                
             </ChartGrid>
         </Page>
     )
