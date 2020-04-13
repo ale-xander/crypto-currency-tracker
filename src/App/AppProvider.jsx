@@ -24,6 +24,8 @@ export class AppProvider extends React.Component {
             isInFavorites: this.isInFavorites,
             setFilteredCoins: this.setFilteredCoins,
             setCurrentFavorite: this.setCurrentFavorite,
+            toggleChart: this.toggleChart,
+            timeInterval: 'months'
         }
     }
     // ------------------ Fetch the coins, prices and historical ------------------
@@ -161,7 +163,7 @@ export class AppProvider extends React.Component {
                     this.state.currentFavorite,
                     ['USD'],
                     moment()     //new moment = today
-                    .subtract({months: units})
+                    .subtract({[this.state.timeInterval]: units})
                     .toDate()   //to put it in JS data
                 )
             )
@@ -178,11 +180,17 @@ export class AppProvider extends React.Component {
             {
                 name: this.state.currentFavorite,
                 data: results.map((ticker, index) => [
-                    moment().subtract({months: TIME_UNITS - index}).valueOf(), ticker.USD
+                    moment().subtract({[this.state.timeInterval]: TIME_UNITS - index}).valueOf(), ticker.USD
                 ])
             }
         ]
         this.setState({historical});
+    }
+
+    //change the time unit from here. value = new time unit
+    toggleChart = (value) => {
+        //console.log(value);
+        this.setState({timeInterval: value, historical: null}, this.fetchHistorical);
     }
 
     //give the children access to provider
