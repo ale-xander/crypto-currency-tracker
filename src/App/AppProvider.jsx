@@ -14,7 +14,7 @@ export class AppProvider extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            page: 'dashboard',
+            page: 'my coins',
             setPage: this.setPage,
             ...this.savedSettings(),
             confirmFavorites: this.confirmFavorites,
@@ -101,7 +101,7 @@ export class AppProvider extends React.Component {
         let cryptoCompareData = JSON.parse(localStorage.getItem('cryptoData'));
         //if we don't have data, return first visit default data
         if(!cryptoCompareData){
-            return {page: 'settings', firstVisit: true}
+            return {page: 'coin selector', firstVisit: true}
             //firstVisit: boolean to keep track if user has been here before
         }
         //let favorites = ['BTC']

@@ -39,7 +39,7 @@ function ControlButton({name}) {
             <ControlButtonElement 
                 active = {page === name}
                 onClick = {() => setPage(name)}
-                hidden = {firstVisit && name === 'dashboard'}
+                hidden = {firstVisit && name === 'my coins'}
             >
                 {toProperCase(name)}
             </ControlButtonElement>
@@ -54,8 +54,8 @@ export default function () {
         <Bar>
             <Logo>Logo_here</Logo>
             <div/>
-            <ControlButton active name="dashboard"/>
-            <ControlButton name="settings"/>
+            <ControlButton active name="my coins"/>
+            <ControlButton name="coin selector"/>
         </Bar>
     )
 }
