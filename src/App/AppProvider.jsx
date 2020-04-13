@@ -1,12 +1,14 @@
 // state manager for the app
 import React from 'react';
 import _ from 'lodash';
+import moment from 'moment';
 export const AppContext = React.createContext();
 
 global.fetch = require('node-fetch')
 const cc = require('cryptocompare')
 cc.setApiKey('d455128ae090441e96c16dbd4db1660d3fd94ce1c5f47557d4f5b288e9b97b72')
 const MAX_FAVORITES = 10;
+const TIME_UNITS = 10; //days, weeks, months
 
 export class AppProvider extends React.Component {
     constructor(props){
@@ -29,7 +31,7 @@ export class AppProvider extends React.Component {
         console.log('component did mount')
         this.fetchCoins();
         this.fetchPrices();
-        // this.fetchHistorical();
+        this.fetchHistorical();
     }
     
     fetchCoins = async () => {
@@ -144,6 +146,30 @@ export class AppProvider extends React.Component {
             ...JSON.parse(localStorage.getItem('cryptoData')),
             currentFavorite: sym
         }))
+    }
+
+    //get historical data, push to Promises (10), resolve when all 10 promises have resolved.
+    historical = () => {
+        let promises = [];
+        for (let units = TIME_UNITS; units > 0; units--){
+            promises.push(
+                cc.priceHistorical(
+                    this.state.currentFavorite,
+                    ['USD'],
+                    moment()     //new moment = today
+                    .subtract({months: units})
+                    .toDate()   //to put it in JS data
+                )
+            )
+        }
+        console.log('monent', moment())
+        return Promise.all(promises);
+    }
+
+    fetchHistorical = async () => {
+        if (this.state.firstVisit) return;
+        let results = await this.historical();
+        console.log(`10 units of historical data: `, results)
     }
 
     //give the children access to provider
