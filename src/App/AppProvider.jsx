@@ -75,9 +75,12 @@ export class AppProvider extends React.Component {
             firstVisit: false,
             page: 'dashboard',
             currentFavorite,
+            prices: null,
+            historical: null
         },
         () => {
-            this.fetchPrices()
+            this.fetchPrices();
+            this.fetchHistorical();
         }
         );
 
@@ -140,7 +143,9 @@ export class AppProvider extends React.Component {
     setCurrentFavorite = (sym) => {
         this.setState({
             currentFavorite: sym,
-        });
+            //to avoid re-rendring with old data, clear old data
+            historical: null
+        }, this.fetchHistorical);
     
         localStorage.setItem('cryptoData', JSON.stringify({
             ...JSON.parse(localStorage.getItem('cryptoData')),
@@ -169,7 +174,16 @@ export class AppProvider extends React.Component {
     fetchHistorical = async () => {
         if (this.state.firstVisit) return;
         let results = await this.historical();
-        console.log(`10 units of historical data: `, results)
+        console.log(`10 units of historical data: `, results);
+        let historical = [
+            {
+                name: this.state.currentFavorite,
+                data: results.map((ticker, index) => [
+                    moment().subtract({months: TIME_UNITS - index}).valueOf(), ticker.USD
+                ])
+            }
+        ]
+        this.setState({historical});
     }
 
     //give the children access to provider
