@@ -18,9 +18,12 @@ const Logo = styled.div`
 `;
 
 const ControlButtonElement = styled.div`
-    cursor: pointer;
+    cursor: pointer; 
     ${props => props.active && css`
-    text-shadow: 0px 0px 60px red;
+    text-shadow: 0px 0px 60px #03ff03;
+    `}
+    ${props => props.hidden && css`
+    display: none; 
     `}
 `;
 // a functional component that's a wrapper for the buttons
@@ -33,15 +36,16 @@ function ControlButton({name, active}) {
         // </AppContext.Consumer>
 
         <AppContext.Consumer>
-        {({page, setPage}) =>(
-        <ControlButtonElement 
-            active = {page === name}
-            onClick = {() => setPage(name)}
-        >
-            {toProperCase(name)}
-        </ControlButtonElement>
-        )}
-    </AppContext.Consumer>
+            {({firstVisit, page, setPage}) =>(
+            <ControlButtonElement 
+                active = {page === name}
+                onClick = {() => setPage(name)}
+                hidden = {firstVisit && name === 'dashboard'}
+            >
+                {toProperCase(name)}
+            </ControlButtonElement>
+            )}
+        </AppContext.Consumer>
       
     )
 };
