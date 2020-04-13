@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import {DeletableTile} from '../Shared/Tile';
+import {fontSize3} from '../Shared/Styles'
 
 export const CoinHeaderGridStyled = styled.div`
     display: grid;
@@ -9,6 +10,7 @@ export const CoinHeaderGridStyled = styled.div`
 
 export const CoinSymbol = styled.div`
     justify-self: right;
+    ${fontSize3}
 `;
 
 const DeleteIcon = styled.div`

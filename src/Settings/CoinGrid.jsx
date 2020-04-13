@@ -20,7 +20,7 @@ function getCoinsToDisplay(coinList, topSection, favorites, filteredCoins){
 
 function getLowerSectionCoins(coinList, filteredCoins){
   return (filteredCoins && Object.keys(filteredCoins)) ||
-    Object.keys(coinList).slice(0, 100)
+    Object.keys(coinList).slice(0, 250)
 }
 
 

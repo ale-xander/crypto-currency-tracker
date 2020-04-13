@@ -1,7 +1,7 @@
 export default function (historical) {
   return {
     title: {
-      text: 'Some title here.'
+      text: 'Coin Price'
     },
 
     /* subtitle: {

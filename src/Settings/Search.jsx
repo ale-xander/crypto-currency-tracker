@@ -61,8 +61,8 @@ export default function () {
         <AppContext.Consumer>
             {({setFilteredCoins, coinList}) =>
                 <SearchGrid onKeyUp={(e) => filterCoins(e, setFilteredCoins, coinList)}> 
-                    saerch all coins 
-                    <SearchInput />
+                    Search all coins 
+                    <SearchInput onKeyUp={(e) => filterCoins(e, setFilteredCoins, coinList)}/>
                 </SearchGrid>
             }
         </AppContext.Consumer>

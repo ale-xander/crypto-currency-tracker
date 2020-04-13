@@ -1,9 +1,8 @@
 import React from 'react';
 import styled, {css} from 'styled-components';
-
 import {AppContext} from "./AppProvider";
 
-const NavBar = styled.div`
+const Bar = styled.div`
     display:grid;
     grid-template-columns: 100px auto 100px 100px;
     margin-bottom: 40px;
@@ -27,7 +26,7 @@ const ControlButtonElement = styled.div`
     `}
 `;
 // a functional component that's a wrapper for the buttons
-function ControlButton({name, active}) {
+function ControlButton({name}) {
     return(
         // <AppContext.Consumer>
         //     <ControlButtonElement active={active}>
@@ -51,13 +50,12 @@ function ControlButton({name, active}) {
 };
 
 export default function () {
-    return (<
-        NavBar>
+    return (
+        <Bar>
             <Logo>Logo_here</Logo>
             <div/>
             <ControlButton active name="dashboard"/>
             <ControlButton name="settings"/>
-        
-        </NavBar>
+        </Bar>
     )
 }

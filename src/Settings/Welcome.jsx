@@ -6,12 +6,13 @@ export default function () {
     <>
       <AppContext.Consumer>
         {({ firstVisit }) =>
-          firstVisit ? (
+          firstVisit 
+          ? (
                 <div>
                     Welcome Crypto App. Select your crypto currencies.{' '}
                 </div>
             ) 
-                    : null
+          : null
         }
       </AppContext.Consumer>
     </>

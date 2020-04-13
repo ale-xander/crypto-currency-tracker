@@ -7,8 +7,8 @@ export const AppContext = React.createContext();
 global.fetch = require('node-fetch')
 const cc = require('cryptocompare')
 cc.setApiKey('d455128ae090441e96c16dbd4db1660d3fd94ce1c5f47557d4f5b288e9b97b72')
-const MAX_FAVORITES = 10;
-const TIME_UNITS = 10; //days, weeks, months
+const MAX_FAVORITES = 15;
+const TIME_UNITS = 12; //days, weeks, months
 
 export class AppProvider extends React.Component {
     constructor(props){
@@ -18,7 +18,7 @@ export class AppProvider extends React.Component {
             setPage: this.setPage,
             ...this.savedSettings(),
             confirmFavorites: this.confirmFavorites,
-            favorites: ['BTC', 'ETH'],
+            favorites: ['BTC', 'ETH', 'BCH','LINK','EOS', 'OKB','LTC','ETC', 'XLM', 'XMR'],
             addCoin: this.addCoin,
             removeCoin: this.removeCoin,
             isInFavorites: this.isInFavorites,
@@ -60,9 +60,8 @@ export class AppProvider extends React.Component {
     }
     
     //check if coin is already in favorites. takes an array and and checks if key is in array
-    isInFavorites = key => {
-        _.includes(this.state.favorites, key)
-    }
+    isInFavorites = key => _.includes(this.state.favorites, key)
+    
 
     setPage = page => this.setState({page})
     
@@ -196,4 +195,3 @@ export class AppProvider extends React.Component {
     }
 }
 
-//export default AppProvider;
