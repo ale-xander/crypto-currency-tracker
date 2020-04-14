@@ -25,7 +25,7 @@ export default function () {
             {({confirmFavorites}) => 
                 <CenterDiv>
                     <ConfirmButtonStyled onClick={confirmFavorites}>
-                        Confirm
+                        Confirm Your Coin Selection
                     </ConfirmButtonStyled>
                 </CenterDiv>
             }

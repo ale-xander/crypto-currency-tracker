@@ -8,9 +8,13 @@ export default function () {
         {({ firstVisit }) =>
           firstVisit 
           ? (
+              <>
                 <div>
-                    Welcome Crypto App. Select your crypto currencies.{' '}
+                    Here are some popular crypto currencies. 
+                    You can add more to your Favorites by searching below and clicking on the ones you want.{' '}
                 </div>
+                <div className='spacer'> </div>
+              </>
             ) 
           : null
         }

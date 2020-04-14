@@ -4,11 +4,13 @@ import ConfirmButton from './ConfirmButton';
 import Page from '../Shared/Page';
 import CoinGrid from './CoinGrid';
 import Search from './Search'
+import Favorites from './Favorites'
 
 export default function(){
     return(
-        <Page name="settings">
+        <Page name="coin selector">
             <Welcome />
+            <Favorites />
             <CoinGrid topSection />
             <ConfirmButton />
             <Search />
