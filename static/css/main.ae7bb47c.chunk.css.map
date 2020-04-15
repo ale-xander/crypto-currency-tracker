@@ -1,0 +1,1 @@
+{"version":3,"sources":["App.css"],"names":[],"mappings":"AAAA,KACI,qBAAsB,CACtB,UAAY,CACZ,oCACJ,CAEA,QACI,eACF","file":"main.ae7bb47c.chunk.css","sourcesContent":["body{\n    background-color: grey;\n    color: white;\n    font-family: 'Electrolize', sans-serif;\n}\n\n.spacer{\n    margin-top: 50px;\n  }"]}
