@@ -25,7 +25,7 @@ function filterCoins(e, setFilteredCoins, coinList){
         //if you clear the search it should go back to all the results
     if(!inputValue){
         setFilteredCoins(null);
-        return;
+        return null;
     }
     handleFilter(inputValue, coinList, setFilteredCoins);
 }
