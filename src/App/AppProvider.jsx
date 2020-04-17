@@ -116,7 +116,7 @@ export class AppProvider extends React.Component {
     //get coin prices
     fetchPrices = async () => {
         //don't fetch prices before you have favorites
-        if(this.state.firstVisit) return ;
+        if(this.state.firstVisit) return null;
         
         //return a promise array; wait for prices() to resolve
         let prices = await this.prices();

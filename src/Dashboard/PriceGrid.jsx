@@ -15,14 +15,14 @@ export default function () {
     return (
         <AppContext.Consumer>
             {
-                ({prices}) => (
+                ({prices}) => {return(
                     <PriceGrid>
-                        {prices.map((price, index) => (
+                        {prices.map((price, index) => {return(
                             <PriceTile key={`priceTile-${index}`} index={index} price={price} />
-                        )
+                        )}
                         )}
                     </PriceGrid>
-                )
+                )}
             }
         </AppContext.Consumer>
     );

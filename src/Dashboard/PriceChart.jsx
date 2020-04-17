@@ -11,7 +11,7 @@ export default function () {
     return (
         <AppContext.Consumer>
             {
-            ({historical, toggleChart}) => (
+            ({historical, toggleChart}) => {return(
                 <Tile>
                     <ChartSelector
                     defaultValue="months"
@@ -27,7 +27,7 @@ export default function () {
                         : <div> Loading Historical Data </div>
                     }
                 </Tile>
-                )
+                )}
             }
         </AppContext.Consumer>
     )

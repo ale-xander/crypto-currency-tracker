@@ -35,7 +35,7 @@ function ControlButton({name}) {
         // </AppContext.Consumer>
 
         <AppContext.Consumer>
-            {({firstVisit, page, setPage}) => (
+            {({firstVisit, page, setPage}) => {return(
                 <ControlButtonElement 
                     active = {page === name}
                     onClick = {() => setPage(name)}
@@ -43,7 +43,7 @@ function ControlButton({name}) {
                 >
                     {toProperCase(name)}
                 </ControlButtonElement>
-                )
+                )}
             }
         </AppContext.Consumer>
       

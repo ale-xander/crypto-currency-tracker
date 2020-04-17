@@ -59,12 +59,12 @@ const handleFilter = _.debounce((inputValue, coinList, setFilterCoins) => {
 export default function () {
     return (
         <AppContext.Consumer>
-            {({setFilteredCoins, coinList}) => (
+            {({setFilteredCoins, coinList}) => {return(
                 <SearchGrid onKeyUp={(e) => filterCoins(e, setFilteredCoins, coinList)}> 
                     Search all coins 
                     <SearchInput onKeyUp={(e) => filterCoins(e, setFilteredCoins, coinList)}/>
                 </SearchGrid>
-            )
+            )}
         }
         </AppContext.Consumer>
     )
