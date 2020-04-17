@@ -35,15 +35,16 @@ function ControlButton({name}) {
         // </AppContext.Consumer>
 
         <AppContext.Consumer>
-            {({firstVisit, page, setPage}) =>(
-            <ControlButtonElement 
-                active = {page === name}
-                onClick = {() => setPage(name)}
-                hidden = {firstVisit && name === 'my coins'}
-            >
-                {toProperCase(name)}
-            </ControlButtonElement>
-            )}
+            {({firstVisit, page, setPage}) => (
+                <ControlButtonElement 
+                    active = {page === name}
+                    onClick = {() => setPage(name)}
+                    hidden = {firstVisit && name === 'my coins'}
+                >
+                    {toProperCase(name)}
+                </ControlButtonElement>
+                )
+            }
         </AppContext.Consumer>
       
     )

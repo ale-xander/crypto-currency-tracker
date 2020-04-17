@@ -5,7 +5,7 @@ export default function () {
   return (
     <>
       <AppContext.Consumer>
-        {({ firstVisit }) =>
+        {({ firstVisit }) => (
           firstVisit 
           ? (
               <>
@@ -17,6 +17,7 @@ export default function () {
               </>
             ) 
           : null
+          )
         }
       </AppContext.Consumer>
     </>

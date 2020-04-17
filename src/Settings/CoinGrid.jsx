@@ -29,12 +29,14 @@ export default function ({topSection}){
     <AppContext.Consumer>
     {({coinList, favorites, filteredCoins}) => (
       <CoinGridStyled>
-            {getCoinsToDisplay(coinList, topSection, favorites, filteredCoins).map(coinKey => 
+            {getCoinsToDisplay(coinList, topSection, favorites, filteredCoins).map(coinKey => (
               <CoinTile key={coinKey} topSection={topSection} coinKey={coinKey} />
+            )
             )}
         
       </CoinGridStyled>
-    )}
+    )
+    }
   </AppContext.Consumer>
   );
 }
